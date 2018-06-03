@@ -14,7 +14,7 @@ def Matrix_Multiplication(A,B):
                     result[i][k] += A[i][j]*B[j][k]
         return result
 
-I = cv2.imread("D:\\PyCharm Community Edition 2018.1.3\\C4T Techkids\\Image Processing\\Image\\Lenna.png")
+I = cv2.imread("D:\\PyCharm Community Edition 2018.1.3\\C4T Techkids\\Image Processing\\Image\\Square.png")
 gray = cv2.cvtColor(I, cv2.COLOR_RGB2GRAY)
 cv2.imshow("Old gray", gray)
 shape_gray = gray.shape
@@ -34,60 +34,58 @@ C = np.array([
     [-1, 4, -1],
     [0, -1, 0]
 ])
-temp = np.array([
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0],
-])
+temp = gray[:,:]*0
 n = input("Choose A,B,or C: ")
 if n == 'A' or n == 'B' or n == 'C':
     if n == 'A':
-        if shape_gray[0] % 3 == 0 and shape_gray[1] % 3 == 0:
-            for row in range(3, shape_gray[0], 3):
-                for col in range(3, shape_gray[1], 3):
-                    gray[row-3:row, col-3:col] = Matrix_Multiplication(gray[row-3:row, col-3:col], A)
-        else:
-            remain_row = shape_gray[0] % 3
-            remain_col = shape_gray[1] % 3
-            for row in range(3,shape_gray[0],3):
-                for col in range(3,shape_gray[1],3):
-                    gray[row-3:row, col-3:col] = Matrix_Multiplication(gray[row-3:row, col-3:col], A)
-            for row in range(shape_gray[0]-remain_row+0,shape_gray[0]):
-                gray[row:shape_gray[0], 0: shape_gray[1]] = 0
-            for col in range(shape_gray[1]-remain_col+0, shape_gray[1]):
-                gray[0:shape_gray[0], col:shape_gray[1]] = 0
+        # if shape_gray[0] % 3 == 0 and shape_gray[1] % 3 == 0:
+        for row in range(3, shape_gray[0]):
+            for col in range(3, shape_gray[1]):
+                temp_1 = gray[row-:row,col-2:col]
+                temp[row-3:row, col-3:col] = Matrix_Multiplication(gray[row-3:row, col-3:col], A)
+                if temp[row]
+        # else:
+        #     remain_row = shape_gray[0] % 3
+        #     remain_col = shape_gray[1] % 3
+        #     for row in range(3,shape_gray[0]):
+        #         for col in range(3,shape_gray[1]):
+        #             temp[row-3:row, col-3:col] = Matrix_Multiplication(gray[row-3:row, col-3:col], A)
+        #     for row in range(shape_gray[0]-remain_row+0,shape_gray[0]):
+        #         temp[row:shape_gray[0], 0: shape_gray[1]] = 0
+        #     for col in range(shape_gray[1]-remain_col+0, shape_gray[1]):
+        #         temp[0:shape_gray[0], col:shape_gray[1]] = 0
 
-    elif n == 'B':
-        if shape_gray[0] % 3 == 0 and shape_gray[1] % 3 == 0:
-            for row in range(3, shape_gray[0],3):
-                for col in range(3, shape_gray[1],3):
-                    gray[row-3:row, col-3:col] = Matrix_Multiplication(gray[row-3:row, col-3:col], B)
-        else:
-            remain_row = shape_gray[0] % 3
-            remain_col = shape_gray[1] % 3
-            for row in range(3, shape_gray[0],3):
-                for col in range(3, shape_gray[1],3):
-                    gray[row-3:row, col-3:col] = Matrix_Multiplication(gray[row-3:row, col-3:col], B)
-            for row in range(shape_gray[0]-remain_row+0, shape_gray[0]):
-                gray[row:shape_gray[0], 0: shape_gray[1]] = 0
-            for col in range(shape_gray[1]-remain_col+0, shape_gray[1]):
-                gray[0:shape_gray[0], col:shape_gray[1]] = 0
-    else:
-        if shape_gray[0] % 3 == 0 and shape_gray[1] % 3 == 0:
-            for row in range(3, shape_gray[0],3):
-                for col in range(3, shape_gray[1],3):
-                    gray[row-3:row, col-3:col] = Matrix_Multiplication(gray[row-3:row, col-3:col], C)
-        else:
-            remain_row = shape_gray[0] % 3
-            remain_col = shape_gray[1] % 3
-            for row in range(3,shape_gray[0],3):
-                for col in range(3,shape_gray[1],3):
-                    gray[row-3:row, col-3:col] = Matrix_Multiplication(gray[row-3:row, col-3:col], C)
-            for row in range(shape_gray[0]-remain_row+0,shape_gray[0]):
-                gray[row:shape_gray[0], 0: shape_gray[1]] = 0
-            for col in range(shape_gray[1]-remain_col+0, shape_gray[1]):
-                gray[0:shape_gray[0], col:shape_gray[1]] = 0
-cv2.imshow("New gray", gray)
+    # elif n == 'B':
+    #     if shape_gray[0] % 3 == 0 and shape_gray[1] % 3 == 0:
+    #         for row in range(3, shape_gray[0],3):
+    #             for col in range(3, shape_gray[1],3):
+    #                 gray[row-3:row, col-3:col] = Matrix_Multiplication(gray[row-3:row, col-3:col], B)
+    #     else:
+    #         remain_row = shape_gray[0] % 3
+    #         remain_col = shape_gray[1] % 3
+    #         for row in range(3, shape_gray[0],3):
+    #             for col in range(3, shape_gray[1],3):
+    #                 gray[row-3:row, col-3:col] = Matrix_Multiplication(gray[row-3:row, col-3:col], B)
+    #         for row in range(shape_gray[0]-remain_row+0, shape_gray[0]):
+    #             gray[row:shape_gray[0], 0: shape_gray[1]] = 0
+    #         for col in range(shape_gray[1]-remain_col+0, shape_gray[1]):
+    #             gray[0:shape_gray[0], col:shape_gray[1]] = 0
+    # else:
+    #     if shape_gray[0] % 3 == 0 and shape_gray[1] % 3 == 0:
+    #         for row in range(3, shape_gray[0],3):
+    #             for col in range(3, shape_gray[1],3):
+    #                 gray[row-3:row, col-3:col] = Matrix_Multiplication(gray[row-3:row, col-3:col], C)
+    #     else:
+    #         remain_row = shape_gray[0] % 3
+    #         remain_col = shape_gray[1] % 3
+    #         for row in range(3,shape_gray[0],3):
+    #             for col in range(3,shape_gray[1],3):
+    #                 gray[row-3:row, col-3:col] = Matrix_Multiplication(gray[row-3:row, col-3:col], C)
+    #         for row in range(shape_gray[0]-remain_row+0,shape_gray[0]):
+    #             gray[row:shape_gray[0], 0: shape_gray[1]] = 0
+    #         for col in range(shape_gray[1]-remain_col+0, shape_gray[1]):
+    #             gray[0:shape_gray[0], col:shape_gray[1]] = 0
+cv2.imshow("New gray", temp)
 cv2.waitKey()
 
 
